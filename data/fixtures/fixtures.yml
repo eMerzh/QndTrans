@@ -15,3 +15,25 @@
 #     password: changeme
 #     name:     Kris Wallsmith
 #     email:    kris.wallsmith@symfony-project.com
+Part:
+  back:
+    name: backend
+  pub:
+    name: public
+
+Language:
+  l1:
+    name: Français
+    code: fr
+  l2:
+    name: English
+    code: en
+
+Item:
+  i1:
+    Part: back
+    original_text: Save
+  i1:
+    Part: back
+    original_text: User name
+

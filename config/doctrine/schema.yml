@@ -1,0 +1,28 @@
+Language:
+  columns:
+    name: { type: string(255), notnull: true}
+    code: { type: string(255), notnull: true, unique: true }
+
+Part:
+  columns:
+    name: { type: string(255), notnull: true}
+    
+Item:
+  actAs: { Timestampable: ~ }
+  columns:
+    part_id: { type: integer, notnull: true }
+    original_text: { type: string, notnull: true}
+  relations:
+    Part: { onDelete: CASCADE, local: part_id, foreign: id, foreignAlias: Items } 
+
+Translation:
+  actAs: { Timestampable: ~ }
+  columns:
+    item_id: { type: integer, notnull: true }
+    lang_id: { type: integer, notnull: true }
+    translated_text: { type: string, notnull: true}
+    is_fuzzy: { type: boolean, notnull: true, default: 1 }
+    is_autotrans: { type: boolean, notnull: true, default: 1 }
+  relations:
+    Lang: { onDelete: CASCADE, local: lang_id, foreign: id, foreignAlias: Items }
+    Item: { onDelete: CASCADE, local: item_id, foreign: id, foreignAlias: Translations }
