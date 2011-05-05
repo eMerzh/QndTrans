@@ -15,6 +15,16 @@
 #     password: changeme
 #     name:     Kris Wallsmith
 #     email:    kris.wallsmith@symfony-project.com
+# TranslatedPart:
+#   b-fr:
+#     Part: back
+#     Language: l1
+#   b-nl:
+#     Part: back
+#     Language: l2
+#   pub-fr:
+#     Part: pub
+#     Language: l1
 Part:
   back:
     name: backend
@@ -22,18 +32,31 @@ Part:
     name: public
 
 Language:
-  l1:
+  fr:
     name: Français
     code: fr
-  l2:
+  en:
     name: English
     code: en
 
-Item:
-  i1:
+Message:
+  m1:
     Part: back
     original_text: Save
-  i1:
+  m2:
     Part: back
     original_text: User name
+  m3:
+    Part: pub
+    original_text: User name
 
+Translation:
+  t1:
+    Part: back
+    Language: en
+    Message: m1
+    translated_text: brol
+  t2:
+    Part: back
+    Language: fr
+    Message: m1

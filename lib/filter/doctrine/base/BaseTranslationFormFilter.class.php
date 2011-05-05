@@ -13,8 +13,9 @@ abstract class BaseTranslationFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'item_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Item'), 'add_empty' => true)),
-      'lang_id'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'part_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Part'), 'add_empty' => true)),
+      'message_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Message'), 'add_empty' => true)),
+      'lang_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Language'), 'add_empty' => true)),
       'translated_text' => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'is_fuzzy'        => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'is_autotrans'    => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
@@ -23,8 +24,9 @@ abstract class BaseTranslationFormFilter extends BaseFormFilterDoctrine
     ));
 
     $this->setValidators(array(
-      'item_id'         => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Item'), 'column' => 'id')),
-      'lang_id'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'part_id'         => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Part'), 'column' => 'id')),
+      'message_id'      => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Message'), 'column' => 'id')),
+      'lang_id'         => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Language'), 'column' => 'id')),
       'translated_text' => new sfValidatorPass(array('required' => false)),
       'is_fuzzy'        => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'is_autotrans'    => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
@@ -50,8 +52,9 @@ abstract class BaseTranslationFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id'              => 'Number',
-      'item_id'         => 'ForeignKey',
-      'lang_id'         => 'Number',
+      'part_id'         => 'ForeignKey',
+      'message_id'      => 'ForeignKey',
+      'lang_id'         => 'ForeignKey',
       'translated_text' => 'Text',
       'is_fuzzy'        => 'Boolean',
       'is_autotrans'    => 'Boolean',

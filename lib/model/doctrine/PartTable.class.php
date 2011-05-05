@@ -7,13 +7,24 @@
  */
 class PartTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object PartTable
-     */
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('Part');
-    }
+  /**
+    * Returns an instance of this class.
+    *
+    * @return object PartTable
+    */
+  public static function getInstance()
+  {
+      return Doctrine_Core::getTable('Part');
+  }
+
+  public function getPartsWithMessages()
+  {
+    $q = Doctrine_Query::create()
+      ->select('p.*,count(m.id) as num_messages')
+      ->from('Part p')
+      ->leftJoin('p.Messages m')
+      ->groupBy('p.id, p.name')
+      ->orderBy('p.name asc');
+    return $q->execute();
+  }
 }

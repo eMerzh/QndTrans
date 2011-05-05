@@ -17,6 +17,12 @@ class partActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->parts = Doctrine::getTable('Part')->findAll();
+    $this->parts = Doctrine::getTable('Part')->getPartsWithMessages();
+  }
+
+  public function executeChooselang(sfWebRequest $request)
+  {
+    $this->langs = Doctrine::getTable('Language')->getLangsForPart($request->getParameter('part'));
+    $this->message_number = Doctrine::getTable('Message')->getCountForPart($request->getParameter('part'));
   }
 }

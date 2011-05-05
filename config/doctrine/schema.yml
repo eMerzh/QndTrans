@@ -6,23 +6,35 @@ Language:
 Part:
   columns:
     name: { type: string(255), notnull: true}
-    
-Item:
+
+Message:
   actAs: { Timestampable: ~ }
   columns:
     part_id: { type: integer, notnull: true }
     original_text: { type: string, notnull: true}
   relations:
-    Part: { onDelete: CASCADE, local: part_id, foreign: id, foreignAlias: Items } 
+    Part: { onDelete: CASCADE, local: part_id, foreign: id, foreignAlias: Messages } 
+
+
+# TranslatedPart:
+#   columns:
+#     part_id: { type: integer, notnull: true }
+#     lang_id: { type: integer, notnull: true }
+#   relations:
+#     Part: { onDelete: CASCADE, local: part_id, foreign: id, foreignAlias: TranslatedParts } 
+#     Language: { onDelete: CASCADE, local: lang_id, foreign: id, foreignAlias: TranslatedParts }
+# 
 
 Translation:
   actAs: { Timestampable: ~ }
   columns:
-    item_id: { type: integer, notnull: true }
+    part_id: { type: integer, notnull: true }
+    message_id: { type: integer, notnull: true }
     lang_id: { type: integer, notnull: true }
-    translated_text: { type: string, notnull: true}
+    translated_text: { type: string, notnull: true, default: ''}
     is_fuzzy: { type: boolean, notnull: true, default: 1 }
     is_autotrans: { type: boolean, notnull: true, default: 1 }
   relations:
-    Lang: { onDelete: CASCADE, local: lang_id, foreign: id, foreignAlias: Items }
-    Item: { onDelete: CASCADE, local: item_id, foreign: id, foreignAlias: Translations }
+    Language: { onDelete: CASCADE, local: lang_id, foreign: id, foreignAlias: Translations }
+    Message: { onDelete: CASCADE, local: message_id, foreign: id, foreignAlias: Translations }
+    Part: { onDelete: CASCADE, local: part_id, foreign: id, foreignAlias: Messages } 

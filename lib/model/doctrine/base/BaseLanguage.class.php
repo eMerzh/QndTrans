@@ -7,11 +7,14 @@
  * 
  * @property string $name
  * @property string $code
+ * @property Doctrine_Collection $Translations
  * 
- * @method string   getName() Returns the current record's "name" value
- * @method string   getCode() Returns the current record's "code" value
- * @method Language setName() Sets the current record's "name" value
- * @method Language setCode() Sets the current record's "code" value
+ * @method string              getName()         Returns the current record's "name" value
+ * @method string              getCode()         Returns the current record's "code" value
+ * @method Doctrine_Collection getTranslations() Returns the current record's "Translations" collection
+ * @method Language            setName()         Sets the current record's "name" value
+ * @method Language            setCode()         Sets the current record's "code" value
+ * @method Language            setTranslations() Sets the current record's "Translations" collection
  * 
  * @package    trad
  * @subpackage model
@@ -39,6 +42,8 @@ abstract class BaseLanguage extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasMany('Translation as Translations', array(
+             'local' => 'id',
+             'foreign' => 'lang_id'));
     }
 }

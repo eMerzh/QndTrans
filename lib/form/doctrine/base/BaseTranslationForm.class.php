@@ -16,8 +16,9 @@ abstract class BaseTranslationForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'              => new sfWidgetFormInputHidden(),
-      'item_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Item'), 'add_empty' => false)),
-      'lang_id'         => new sfWidgetFormInputText(),
+      'part_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Part'), 'add_empty' => false)),
+      'message_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Message'), 'add_empty' => false)),
+      'lang_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Language'), 'add_empty' => false)),
       'translated_text' => new sfWidgetFormTextarea(),
       'is_fuzzy'        => new sfWidgetFormInputCheckbox(),
       'is_autotrans'    => new sfWidgetFormInputCheckbox(),
@@ -27,9 +28,10 @@ abstract class BaseTranslationForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'              => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'item_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Item'))),
-      'lang_id'         => new sfValidatorInteger(),
-      'translated_text' => new sfValidatorString(),
+      'part_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Part'))),
+      'message_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Message'))),
+      'lang_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Language'))),
+      'translated_text' => new sfValidatorString(array('required' => false)),
       'is_fuzzy'        => new sfValidatorBoolean(array('required' => false)),
       'is_autotrans'    => new sfValidatorBoolean(array('required' => false)),
       'created_at'      => new sfValidatorDateTime(),

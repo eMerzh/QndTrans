@@ -7,13 +7,25 @@
  */
 class LanguageTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object LanguageTable
-     */
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('Language');
-    }
+  /**
+   * Returns an instance of this class.
+   *
+   * @return object LanguageTable
+   */
+  public static function getInstance()
+  {
+      return Doctrine_Core::getTable('Language');
+  }
+
+  public function getLangsForPart($part)
+  {
+    $q = Doctrine_Query::create()
+    ->select("l.id, l.name, count(CASE WHEN t.translated_text='' AND not is_fuzzy THEN 1 ELSE NULL END) as num_trans, count(CASE WHEN t.translated_text='' AND is_fuzzy THEN 1 ELSE NULL END) as num_fuzzy")
+    ->from('Language l')
+    ->innerJoin('l.Translations t')
+    ->where('t.part_id = ?', $part)
+    ->groupby('l.name , l.id');
+
+    return $q->execute();
+  }
 }
