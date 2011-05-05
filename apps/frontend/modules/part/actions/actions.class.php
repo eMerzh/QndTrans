@@ -22,6 +22,7 @@ class partActions extends sfActions
 
   public function executeChooselang(sfWebRequest $request)
   {
+    $this->part_id = $request->getParameter('part');
     $this->langs = Doctrine::getTable('Language')->getLangsForPart($request->getParameter('part'));
     $this->message_number = Doctrine::getTable('Message')->getCountForPart($request->getParameter('part'));
   }

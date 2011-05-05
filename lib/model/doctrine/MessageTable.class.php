@@ -24,4 +24,15 @@ class MessageTable extends Doctrine_Table
       ->where('part_id = ?',$part_id);
     return $q->count();
   }
+
+  public function getMessagesForTranslation($part, $lang)
+  {
+    $q = Doctrine_Query::create()
+    ->from('Message m')
+    ->leftJoin('m.Translations t')
+    ->where('m.part_id = ?', $part)
+    ->andWhere('t.lang_id = ? or t.id is null', $lang);
+      //Or to fetch null rows for non present translations
+  return $q->execute();
+  }
 }

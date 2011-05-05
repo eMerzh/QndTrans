@@ -20,12 +20,14 @@ class LanguageTable extends Doctrine_Table
   public function getLangsForPart($part)
   {
     $q = Doctrine_Query::create()
-    ->select("l.id, l.name, count(CASE WHEN t.translated_text='' AND not is_fuzzy THEN 1 ELSE NULL END) as num_trans, count(CASE WHEN t.translated_text='' AND is_fuzzy THEN 1 ELSE NULL END) as num_fuzzy")
-    ->from('Language l')
-    ->innerJoin('l.Translations t')
-    ->where('t.part_id = ?', $part)
+    ->select("l.*,
+(select count(*) from translation t where part_id = ".$part." and lang_id = l.id and (translated_text !='' AND not is_fuzzy) ) as num_trans,
+(select count(*) from translation t where part_id = ".$part." and lang_id = l.id and (translated_text !='' AND is_fuzzy) ) as num_fuzzy")
+    ->from('Language l');
+    /*->leftJoin('l.Translations t')
+    ->where('(t.part_id = ? or t.id is null)', $part)
     ->groupby('l.name , l.id');
-
+*/
     return $q->execute();
   }
 }
