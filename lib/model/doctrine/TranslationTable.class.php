@@ -7,13 +7,43 @@
  */
 class TranslationTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object TranslationTable
-     */
-    public static function getInstance()
+  /**
+    * Returns an instance of this class.
+    *
+    * @return object TranslationTable
+    */
+  public static function getInstance()
+  {
+      return Doctrine_Core::getTable('Translation');
+  }
+
+  public function getTranslationsForMessages($messages,$lang)
+  {
+    $ids=array();
+    foreach($messages as $mess)
     {
-        return Doctrine_Core::getTable('Translation');
+      $ids[] = $mess->getId();
     }
+    $q = Doctrine_Query::create()
+      ->from('Translation t')
+      ->wherein('message_id',$ids)
+      ->andWhere('lang_id = ?',$lang);
+
+
+    $results = $q->execute();
+    $new_res = array();
+    foreach($results as $res)
+    {
+      $new_res[$res->getMessageId()] = $res;
+    }
+    foreach($ids as $id)
+    {
+      if(! isset($new_res[$id]))
+      {
+        $new_res[$id] = new Translation();
+        $new_res[$id]->setMessageId($id);
+      }
+    }
+    return $new_res;
+  }
 }

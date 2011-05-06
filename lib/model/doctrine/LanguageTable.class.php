@@ -24,10 +24,8 @@ class LanguageTable extends Doctrine_Table
 (select count(*) from translation t where part_id = ".$part." and lang_id = l.id and (translated_text !='' AND not is_fuzzy) ) as num_trans,
 (select count(*) from translation t where part_id = ".$part." and lang_id = l.id and (translated_text !='' AND is_fuzzy) ) as num_fuzzy")
     ->from('Language l');
-    /*->leftJoin('l.Translations t')
-    ->where('(t.part_id = ? or t.id is null)', $part)
-    ->groupby('l.name , l.id');
-*/
     return $q->execute();
   }
+  
+
 }

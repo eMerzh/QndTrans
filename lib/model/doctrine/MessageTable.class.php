@@ -29,10 +29,7 @@ class MessageTable extends Doctrine_Table
   {
     $q = Doctrine_Query::create()
     ->from('Message m')
-    ->leftJoin('m.Translations t')
-    ->where('m.part_id = ?', $part)
-    ->andWhere('t.lang_id = ? or t.id is null', $lang);
-      //Or to fetch null rows for non present translations
+    ->where('m.part_id = ?', $part);
   return $q->execute();
   }
 }

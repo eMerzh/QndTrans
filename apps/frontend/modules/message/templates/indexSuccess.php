@@ -1,9 +1,13 @@
-<?php foreach($messages as $message):?>
-  - <?php echo $message['original_text'];?> ==> 
-    <?php if(isset($message['Translations'][0])):?>
-      <?php echo $message['Translations'][0]['translated_text'];?>
-    <?php else:?>
-      n/a
-   <?php endif;?>
-  <br />
-<?php endforeach;?>
+
+<form method="post" action="<?php url_for('message/index');?>">
+<ul>
+  <?php foreach($form['Trans'] as $key=>$translation):?>
+    <li>
+      <h1><?php echo $form->getMessage($translation['message_id']->getValue())->getOriginalText();?></h1>
+      <?php echo $translation;?>
+    </li>
+  <?php endforeach;?>
+</ul>
+  <?php echo $form->renderHiddenFields();?>
+  <input type="submit">
+</form>
