@@ -16,6 +16,9 @@ class messageActions extends sfActions
       $request->getParameter('part'),
       $request->getParameter('lang')
     );
+    $this->language = Doctrine::getTable('Language')->find($request->getParameter('lang'));
+    $this->part = Doctrine::getTable('Part')->find($request->getParameter('part'));
+
     $this->translations = Doctrine::getTable('Translation')->getTranslationsForMessages($this->messages, $request->getParameter('lang'));
 
     $this->form = new TransPageForm(null,array(
