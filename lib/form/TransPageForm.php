@@ -27,7 +27,7 @@ class TransPageForm extends BaseForm
     foreach($this->options['messages'] as $message)
     {
       if($message->getId() == $id)
-        return $message;
+        return sfOutputEscaper::escape('esc_entities',$message) ;
     }
     return false;
   }

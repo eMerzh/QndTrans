@@ -4,6 +4,7 @@
   <?php foreach($form['Trans'] as $key=>$translation):?>
     <li>
       <h2><?php echo $form->getMessage($translation['message_id']->getValue())->getOriginalText();?></h2>
+      <?php get_class($form->getMessage($translation['message_id']->getValue())) ?>
       <?php echo $translation;?>
     </li>
   <?php endforeach;?>
@@ -21,14 +22,15 @@ $(document).ready(function () {
   
   $('h2').click(function(event)
   {
-    mess = $(this);
-    trans_area = mess.next().find('textarea');
+    mess = $(this).parent();
+    trans_area = mess.find('textarea');
     trans_area.attr('disabled','disabled');
-    google.language.translate(mess.html(), "en", "<?php echo $language['code'];?>", function(result) {
+    google.language.translate($(this).html(), "en", "<?php echo $language['code'];?>", function(result) {
       if (!result.error) {
         trans_area.html(result.translation);
-        console.log(result.translation);
+        console.log();
         trans_area.removeAttr('disabled');
+        mess.find('input[id$=\"_autotrans"]').attr('checked','checked');
       }
     });
   });
