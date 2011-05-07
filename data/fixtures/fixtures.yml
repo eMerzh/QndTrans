@@ -38,6 +38,175 @@ Language:
   en:
     name: English
     code: en
+  af:
+    name: Afrikaans
+    code: af
+  sq:
+    name: Shqip
+    code: sq
+  de:
+    name: Deutsch
+    code: de
+  ar:
+    name: العربية
+    code: ar
+  hy:
+    name: Հայերեն
+    code: hy
+  az:
+    name: azərbaycan dili
+    code: az
+  eu:
+    name: euskara
+    code: eu
+  be:
+    name: Беларуская
+    code: be
+  bg:
+    name: български език
+    code: bg
+  ca:
+    name: Català
+    code: ca
+  zh:
+    name: 中文
+    code: zh
+  ko:
+    name: 한국어 (韓國語), 조선어 (朝鮮語)
+    code: ko:
+  ht:
+    name: Kreyòl ayisyen
+    code: ht
+  hr:
+    name: hrvatski
+    code: hr
+  da:
+    name: dansk
+    code: da
+  es:
+    name: español, castellano
+    code: es
+  et:
+    name: eesti
+    code: et
+  fi:
+    name: suomi
+    code: fi
+  gl:
+    name: Galego
+    code: gl
+  cy:
+    name: Cymraeg
+    code: cy
+  ka:
+    name: ქართული
+    code: ka
+  el:
+    name: Ελληνικά
+    code: el
+  iw:
+    name: עברית
+    code: iw
+  hi:
+    name: हिन्दी, हिंदी
+    code: hi
+  hu:
+    name: a
+    code: hu
+  id:
+    name: a
+    code: id
+  ga:
+    name: a
+    code: ga
+  is:
+    name: a
+    code: is
+  it:
+    name: a
+    code: it
+  ja:
+    name: a
+    code: ja
+  la:
+    name: a
+    code: la
+  lv:
+    name: a
+    code: lv
+  lt:
+    name: a
+    code: lt
+  mk:
+    name: a
+    code: mk
+  ms:
+    name: a
+    code: ms
+  mt:
+    name: a
+    code: mt
+  nl:
+    name: a
+    code: nl
+  no:
+    name: a
+    code: no
+  fa:
+    name: a
+    code: fa
+  pl:
+    name: a
+    code: pl
+  pt:
+    name: a
+    code: pt
+  ro:
+    name: a
+    code: ro
+  ru:
+    name: a
+    code: ru
+  sr:
+    name: a
+    code: sr
+  sk:
+    name: a
+    code: sk
+  sl:
+    name: a
+    code: sl
+  sv:
+    name: a
+    code: sv
+  sw:
+    name: a
+    code: sw
+  tl:
+    name: a
+    code: tl
+  cs:
+    name: a
+    code: cs
+  th:
+    name: a
+    code: th
+  tr:
+    name: a
+    code: tr
+  uk:
+    name: a
+    code: uk
+  ur:
+    name: a
+    code: ur
+  vi:
+    name: a
+    code: vi
+  yi:
+    name: a
+    code: yi
+
 
 Message:
   m1:
@@ -47,6 +216,26 @@ Message:
     Part: back
     original_text: User name
   m3:
+    Part: back
+    original_text: Password
+  m4:
+    Part: back
+    original_text: |
+     Hi %name%,
+     Welcome Here.
+  m5:
+    Part: back
+    original_text: The Number is %1.
+  m6:
+    Part: back
+    original_text: "&eacute;lo"
+  m7:
+    Part: back
+    original_text: |
+     Hello <br /> 
+     World
+
+  m8:
     Part: pub
     original_text: User name
 
