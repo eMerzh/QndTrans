@@ -30,6 +30,6 @@ class MessageTable extends Doctrine_Table
     $q = Doctrine_Query::create()
     ->from('Message m')
     ->where('m.part_id = ?', $part);
-  return $q->execute();
+  return $q/*->execute()*/;
   }
 }

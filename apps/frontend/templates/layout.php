@@ -7,6 +7,8 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi?key=ABQIAAAAYLSKVpK83ZqpxzjnjLuW3BTrReK3P99mKBTfLTiMIdvPR6kVWRT4gViM2g7g5ZnSZewMvjLnp8hUGA"></script>
   </head>
   <body>
     <?php echo $sf_content ?>

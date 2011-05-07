@@ -4,7 +4,11 @@
 # default rules
 homepage:
   url:   /
-  param: { module: default, action: index }
+  param: { module: part, action: index }
+
+message_list:
+  url:   /message/index
+  param: { module: message, action: index }
 
 # generic rules
 # please, remove them by adding more specific rules
