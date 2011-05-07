@@ -56,7 +56,7 @@ class messageActions extends sfActions
         try
         {
           $this->form->save();
-          $this->redirect($self_url);
+          $this->redirect('message/index?part='.$request->getParameter('part').'&lang='.$request->getParameter('lang').'&page='.$this->currentPage);
         }
         catch(Doctrine_Exception $ne)
         {
