@@ -111,100 +111,100 @@ Language:
     name: हिन्दी, हिंदी
     code: hi
   hu:
-    name: a
+    name: Magyar
     code: hu
   id:
-    name: a
+    name: Bahasa Indonesia
     code: id
   ga:
-    name: a
+    name: Gaeilge
     code: ga
   is:
-    name: a
+    name: Íslenska
     code: is
   it:
-    name: a
+    name: Italiano
     code: it
   ja:
-    name: a
+    name: 日本語 (にほんご)
     code: ja
   la:
-    name: a
+    name: latine
     code: la
   lv:
-    name: a
+    name: latviešu valoda
     code: lv
   lt:
-    name: a
+    name: lietuvių kalba
     code: lt
   mk:
-    name: a
+    name: македонски јазик
     code: mk
   ms:
-    name: a
+    name: بهاس ملايو‎
     code: ms
   mt:
-    name: a
+    name: Malti
     code: mt
   nl:
-    name: a
+    name: Nederlands
     code: nl
   no:
-    name: a
+    name: Norsk
     code: no
   fa:
-    name: a
+    name: فارسی
     code: fa
   pl:
-    name: a
+    name: polski
     code: pl
   pt:
-    name: a
+    name: Português
     code: pt
   ro:
-    name: a
+    name: română
     code: ro
   ru:
-    name: a
+    name: русский язык
     code: ru
   sr:
-    name: a
+    name: српски језик
     code: sr
   sk:
-    name: a
+    name: slovenčina
     code: sk
   sl:
-    name: a
+    name: slovenščina
     code: sl
   sv:
-    name: a
+    name: svenska
     code: sv
   sw:
-    name: a
+    name: Kiswahili
     code: sw
   tl:
-    name: a
+    name: Wikang Tagalog
     code: tl
   cs:
-    name: a
+    name: česky
     code: cs
   th:
-    name: a
+    name: ไทย
     code: th
   tr:
-    name: a
+    name: Türkçe
     code: tr
   uk:
-    name: a
+    name: українська
     code: uk
   ur:
-    name: a
+    name: اردو
     code: ur
   vi:
-    name: a
+    name: Tiếng Việt
     code: vi
   yi:
-    name: a
+    name: ייִדיש
     code: yi
 
 
