@@ -10,8 +10,25 @@
  */
 class messageActions extends sfActions
 {
+  public function executeXliff(sfWebRequest $request)
+  {
+    $query = Doctrine::getTable('Message')->getMessagesForTranslation(
+      $request->getParameter('part'),
+      $request->getParameter('lang')
+    );
+    $this->messages = $query->execute();
+    $this->language = Doctrine::getTable('Language')->find($request->getParameter('lang'));
+    $this->part = Doctrine::getTable('Part')->find($request->getParameter('part'));
+
+    $this->translations = Doctrine::getTable('Translation')->getTranslationsForMessages($this->messages, $request->getParameter('lang'));
+    $request->setRequestFormat('xml');
+  }
+
+
   public function executeIndex(sfWebRequest $request)
   {
+    $this->search_form = new TranslationFormFilter();
+
     $self_url = '@message_list';
     $self_url_param = '/part/'.$request->getParameter('part').'/lang/'.$request->getParameter('lang');
     $query = Doctrine::getTable('Message')->getMessagesForTranslation(
@@ -56,6 +73,7 @@ class messageActions extends sfActions
         try
         {
           $this->form->save();
+          $this->getUser()->setFlash('saved', 'Your translations has been saved');
           $this->redirect('message/index?part='.$request->getParameter('part').'&lang='.$request->getParameter('lang').'&page='.$this->currentPage);
         }
         catch(Doctrine_Exception $ne)

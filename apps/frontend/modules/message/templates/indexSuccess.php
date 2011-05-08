@@ -1,3 +1,10 @@
+<?php if ($sf_user->hasFlash('saved')): ?>
+  <?php echo $sf_user->getFlash('saved') ?>
+<?php endif; ?>
+<form method="get" action="">
+  <?php echo $search_form;?>
+  <input type="submit">
+</form>
 <h1>Translation of <?php echo $part['name'];?> to <?php echo $language['name'];?></h1>
 
   <div class="pager">
