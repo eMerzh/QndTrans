@@ -1,7 +1,7 @@
 <?php if ($sf_user->hasFlash('saved')): ?>
   <?php echo $sf_user->getFlash('saved') ?>
 <?php endif; ?>
-<form method="get" action="">
+<form method="post" action="<?php url_for('message/index?lang='.$language['id'].'&part='.$part['id']);?>">
   <?php echo $search_form;?>
   <input type="submit">
 </form>
@@ -9,17 +9,16 @@
 
   <div class="pager">
     <ul class="pager_nav">
-      <?php $pagerLayout->display(); ?>
+      <?php //$pagerLayout->display(); ?>
     </ul>
   </div>
 
-<form method="post" action="<?php url_for('message/index');?>">
+<form method="post" action="<?php echo url_for('message/acceptTranslations?lang='.$language['id'].'&part='.$part['id']);?>">
 <ul>
   <?php foreach($form['Trans'] as $key=>$translation):?>
     <li>
       <h2><?php echo $form->getMessage($translation['message_id']->getValue())->getOriginalText();?></h2>
       <div class="butt" style="background-color:red;width:10px; height:10px;float:left;"></div>
-      <?php get_class($form->getMessage($translation['message_id']->getValue())) ?>
       <?php echo $translation;?>
     </li>
   <?php endforeach;?>
