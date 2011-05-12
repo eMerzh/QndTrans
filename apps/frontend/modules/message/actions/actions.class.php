@@ -40,16 +40,18 @@ class messageActions extends sfActions
         try
         {
           $this->form->save();
-          $this->redirect('message/index?part='.$request->getParameter('part').'&lang='.$request->getParameter('lang').'&page='.$this->currentPage.'&'
-            .http_build_query( unserialize( $this->form->getValue('req')) ) );
-         // return $this->renderText('a+'.http_build_query(unserialize($this->form->getValue('req'))));
+          /*$this->redirect('message/index?part='.$request->getParameter('part').'&lang='.$request->getParameter('lang').'&page='.$this->currentPage.'&'
+            .http_build_query( unserialize( $this->form->getValue('req')) ) );*/
+          $url = $this->getController()->genUrl('message/index?part='.$request->getParameter('part').'&lang='.$request->getParameter('lang').'&page='.$this->currentPage)
+            .'?'.http_build_query( unserialize( $this->form->getValue('req')) );
+          $this->redirect($url);
         }
         catch(Doctrine_Exception $ne)
         {
          // $this->form->getErrorSchema()->addError($error, 'Darwin2 :');
         }
       }
-    return $this->renderText('a');
+    return $this->renderText('Error');
   }
 
   public function executeIndex(sfWebRequest $request)
@@ -87,6 +89,7 @@ class messageActions extends sfActions
       // And replace the one of the pager with this new one
       $pager->setCountQuery($counted);         
 */
+    
       $this->currentPage = $request->getParameter('page', 1);
       $this->pagerLayout = new PagerLayoutWithArrows(
         new LazyPager(
@@ -95,7 +98,7 @@ class messageActions extends sfActions
           $this->search_form->getValue('rec_per_page') //Number per pages
         ),
         new Doctrine_Pager_Range_Sliding(array('chunk' => 3)),
-        $this->getController()->genUrl('@message_list').'/page/{%page_number}'
+        $this->getController()->genUrl('message_list/index').'/page/{%page_number}'
       );
       $this->pagerLayout->setTemplate('<li><a href="{%url}">{%page}</a></li>');
       $this->pagerLayout->setSelectedTemplate('<li>{%page}</li>');

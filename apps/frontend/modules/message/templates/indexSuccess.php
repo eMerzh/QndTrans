@@ -1,7 +1,7 @@
 <?php if ($sf_user->hasFlash('saved')): ?>
   <?php echo $sf_user->getFlash('saved') ?>
 <?php endif; ?>
-<form method="post" action="<?php url_for('message/index?lang='.$language['id'].'&part='.$part['id']);?>">
+<form method="get" action="<?php echo url_for('message/index?lang='.$language['id'].'&part='.$part['id']);?>">
   <?php echo $search_form;?>
   <input type="submit">
 </form>
