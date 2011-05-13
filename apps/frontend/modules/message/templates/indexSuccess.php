@@ -1,18 +1,41 @@
 <?php if ($sf_user->hasFlash('saved')): ?>
   <?php echo $sf_user->getFlash('saved') ?>
 <?php endif; ?>
-<form method="get" action="<?php echo url_for('message/index?lang='.$language['id'].'&part='.$part['id']);?>">
+<form method="get" action="<?php echo url_for('message/index?lang='.$language['id'].'&part='.$part['id']);?>" id="trans_filter_form">
   <?php echo $search_form;?>
   <input type="submit">
 </form>
-<h1>Translation of <?php echo $part['name'];?> to <?php echo $language['name'];?></h1>
-
+      <?php echo format_number_choice('[0]No Results Retrieved|[1]Your query retrieved 1 record|(1,+Inf]Your query retrieved %1% records', array('%1%' =>  $pagerLayout->getPager()->getNumResults()),  $pagerLayout->getPager()->getNumResults()) ?>
   <div class="pager">
     <ul class="pager_nav">
-      <?php //$pagerLayout->display(); ?>
+      <?php $pagerLayout->display(); ?>
     </ul>
   </div>
+<h1>Translation of <?php echo $part['name'];?> to <?php echo $language['name'];?></h1>
 
+
+  <script type="text/javascript">
+  $(document).ready(function () {  
+    $(".pager a").click(function (event,data)
+    {
+      var button;
+      if (event.which == null)
+       /* IE case */
+        button = (event.button < 2) ? "LEFT" : ((event.button == 4) ? "MIDDLE" : "RIGHT");
+      else
+        /* All others */
+       button= (event.which < 2) ? "LEFT" :
+                 ((event.which == 2) ? "MIDDLE" : "RIGHT");
+      
+      if(button == "MIDDLE"){ /*just do nothing */ return true;}
+      else event.preventDefault();
+
+
+      $('#translation_filters_current_page').val($(this).closest('li').attr('data-page'));
+      $('#trans_filter_form').closest('form').submit();
+    });
+  });
+  </script>
 <form method="post" action="<?php echo url_for('message/acceptTranslations?lang='.$language['id'].'&part='.$part['id']);?>">
 <ul>
   <?php foreach($form['Trans'] as $key=>$translation):?>

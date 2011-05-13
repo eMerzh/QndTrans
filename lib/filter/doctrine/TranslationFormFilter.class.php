@@ -29,6 +29,8 @@ class TranslationFormFilter extends BaseTranslationFormFilter
     $this->validatorSchema['is_autotrans'] =  new sfValidatorChoice(array('required' => false, 'choices'=> array('', 1, 0), 'empty_value'=>''));
     $this->validatorSchema['is_translated'] =  new sfValidatorChoice(array('required' => false, 'choices'=> array('', 1, 0), 'empty_value'=>''));
     $this->validatorSchema['rec_per_page'] = new sfValidatorChoice(array('required' => false, 'choices'=>array_keys($recPerPages), 'empty_value'=>'5'));
+    $this->widgetSchema['current_page'] = new sfWidgetFormInputHidden();
+    $this->validatorSchema['current_page'] = new sfValidatorInteger(array('required'=>false,'empty_value'=>1));
 
   }
 

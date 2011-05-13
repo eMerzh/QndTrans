@@ -40,15 +40,13 @@ class messageActions extends sfActions
         try
         {
           $this->form->save();
-          /*$this->redirect('message/index?part='.$request->getParameter('part').'&lang='.$request->getParameter('lang').'&page='.$this->currentPage.'&'
-            .http_build_query( unserialize( $this->form->getValue('req')) ) );*/
           $url = $this->getController()->genUrl('message/index?part='.$request->getParameter('part').'&lang='.$request->getParameter('lang').'&page='.$this->currentPage)
             .'?'.http_build_query( unserialize( $this->form->getValue('req')) );
           $this->redirect($url);
         }
         catch(Doctrine_Exception $ne)
         {
-         // $this->form->getErrorSchema()->addError($error, 'Darwin2 :');
+          //Do something!
         }
       }
     return $this->renderText('Error');
@@ -72,25 +70,8 @@ class messageActions extends sfActions
     {
       $query = $this->search_form->getQuery();
       $query->orderBy('m.created_at asc,id asc');
-/*      $pager = new LazyPager(
-          $query,
-          $this->currentPage,
-          $this->search_form->getValue('rec_per_page') //Number per pages
-      );
-// Replace the count query triggered by the Pager to get the number of records retrieved
-      $count_q = clone $query;
-      // Remove from query the group by and order by clauses
-      //$count_q = $count_q->select('count( distinct spec_ref)')->removeDqlQueryPart('groupby')->removeDqlQueryPart('orderby')->limit(0);
-      $count_q = Doctrine_Query()->create()->from('Translation')
-      // Initialize an empty count query
-      $counted = new DoctrineCounted();
-      // Define the correct select count() of the count query
-      $counted->count_query = $count_q;
-      // And replace the one of the pager with this new one
-      $pager->setCountQuery($counted);         
-*/
-    
-      $this->currentPage = $request->getParameter('page', 1);
+
+      $this->currentPage = $this->search_form->getValue('current_page');
       $this->pagerLayout = new PagerLayoutWithArrows(
         new LazyPager(
           $query,
@@ -98,9 +79,9 @@ class messageActions extends sfActions
           $this->search_form->getValue('rec_per_page') //Number per pages
         ),
         new Doctrine_Pager_Range_Sliding(array('chunk' => 3)),
-        $this->getController()->genUrl('message_list/index').'/page/{%page_number}'
+        $this->getController()->genUrl('message/index?part='.$request->getParameter('part').'&lang='.$request->getParameter('lang')).'/page/{%page_number}'
       );
-      $this->pagerLayout->setTemplate('<li><a href="{%url}">{%page}</a></li>');
+      $this->pagerLayout->setTemplate('<li data-page="{%page_number}"><a href="{%url}">{%page}</a></li>');
       $this->pagerLayout->setSelectedTemplate('<li>{%page}</li>');
       $this->pagerLayout->setSeparatorTemplate('<span class="pager_separator">::</span>');
 
@@ -108,7 +89,6 @@ class messageActions extends sfActions
         $this->translations = $this->pagerLayout->execute();
       
       $this->form = new TransPageForm(null,array(
-//         'messages' => $this->messages,
         'translations' => $this->translations,
         'part_id' => $request->getParameter('part'),
         'lang_id' => $request->getParameter('lang'),
