@@ -26,4 +26,22 @@ class partActions extends sfActions
     $this->langs = Doctrine::getTable('Language')->getLangsForPart($request->getParameter('part'));
     $this->message_number = Doctrine::getTable('Message')->getCountForPart($request->getParameter('part'));
   }
+
+  public function executeAddMessage(sfWebRequest $request)
+  {
+    $this->part = Doctrine::getTable('Part')->find($request->getParameter('part'));
+    $mess = new Message();
+    $mess->setPartId($this->part->getId());
+    $this->form = new MessageForm($mess);
+    
+    if ($request->isMethod('post'))
+    {
+      $this->form->bind($request->getParameter('message'));
+      if ($this->form->isValid())
+      {
+        $this->form->save();
+        $this->redirect('part/chooselang?part='.$this->part->getId());
+      }
+    }
+  }
 }

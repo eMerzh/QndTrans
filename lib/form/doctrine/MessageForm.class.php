@@ -12,5 +12,6 @@ class MessageForm extends BaseMessageForm
 {
   public function configure()
   {
+    $this->useFields(array('original_text'));
   }
 }
