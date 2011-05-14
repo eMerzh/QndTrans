@@ -44,4 +44,17 @@ class partActions extends sfActions
       }
     }
   }
+  
+  public function executeMessagedelete(sfWebRequest $request)
+  {
+    $this->message = Doctrine::getTable('Message')->find($request->getParameter('id'));
+    $part = $this->message->getPartId();
+    if($request->hasParameter('confirm'))
+    {
+      
+      $this->message->delete();
+      $this->redirect('part/chooselang?part='.$part);
+    }
+    
+  }
 }

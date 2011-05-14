@@ -61,7 +61,7 @@ class messageActions extends sfActions
     Doctrine::getTable('Translation')->completeTranslationsFor($this->part, $this->language);
 
     $web_request = $request->isMethod('post') ? $request->getPostParameters() : $request->getGetParameters();
-    if(!isset($web_request['translation_filters'])) $web_request['translation_filters'] =array();
+    if(!isset($web_request['translation_filters'])) $web_request['translation_filters'] =array('rec_per_page'=>10);
     $this->search_form = new TranslationFormFilter(null,array('lang' =>$this->language,'part'=> $this->part));
     unset($this->search_form[$this->search_form->getCSRFFieldName()]);
 

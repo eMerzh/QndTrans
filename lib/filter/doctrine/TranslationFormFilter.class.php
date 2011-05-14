@@ -20,16 +20,19 @@ class TranslationFormFilter extends BaseTranslationFormFilter
     $this->widgetSchema['rec_per_page'] = new sfWidgetFormChoice(array('choices' => $recPerPages), array('class'=>'rec_per_page'));
     $this->setDefault('rec_per_page', strval(sfConfig::get('app_recPerPage',10))); 
     $this->widgetSchema->setLabels(array('rec_per_page' => 'Records per page: ',));
-    $this->validatorSchema['rec_per_page'] = new sfValidatorChoice(array('required' => false, 'choices'=>$recPerPages, 'empty_value'=>strval(sfConfig::get('app_recPerPage'))));
+
     $this->widgetSchema['is_fuzzy'] = new sfWidgetFormChoice(array('choices' => $yes_no));
     $this->widgetSchema['is_autotrans'] = new sfWidgetFormChoice(array('choices' => $yes_no));
     $this->widgetSchema['is_translated'] = new sfWidgetFormChoice(array('choices' => $yes_no));
+    $this->widgetSchema['current_page'] = new sfWidgetFormInputHidden();
+    $this->widgetSchema['mess'] = new sfWidgetFormInput();
+
 
     $this->validatorSchema['is_fuzzy'] =  new sfValidatorChoice(array('required' => false, 'choices'=> array('', 1, 0), 'empty_value'=>''));
     $this->validatorSchema['is_autotrans'] =  new sfValidatorChoice(array('required' => false, 'choices'=> array('', 1, 0), 'empty_value'=>''));
     $this->validatorSchema['is_translated'] =  new sfValidatorChoice(array('required' => false, 'choices'=> array('', 1, 0), 'empty_value'=>''));
     $this->validatorSchema['rec_per_page'] = new sfValidatorChoice(array('required' => false, 'choices'=>array_keys($recPerPages), 'empty_value'=>'5'));
-    $this->widgetSchema['current_page'] = new sfWidgetFormInputHidden();
+    $this->validatorSchema['mess'] = new sfValidatorString(array('required' => false));
     $this->validatorSchema['current_page'] = new sfValidatorInteger(array('required'=>false,'empty_value'=>1));
 
   }
@@ -58,6 +61,14 @@ class TranslationFormFilter extends BaseTranslationFormFilter
     elseif($val === '0')
       $query->andWhere("t.translated_text = '' ");
 
+    return $query ;
+  }
+
+  public function addMessColumnQuery($query, $field, $val)
+  {
+    if($val ==='') return $query;
+
+    $query->andWhere("to_tsvector(m.original_text) @@ plainto_tsquery(?)",$val);
     return $query ;
   }
 

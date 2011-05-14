@@ -43,6 +43,7 @@
       <h2><?php echo $form->getMessage($translation['message_id']->getValue())->getOriginalText();?></h2>
       <div class="butt" style="background-color:red;width:10px; height:10px;float:left;"></div>
       <?php echo $translation;?>
+      <?php echo link_to('Delete the message','part/messagedelete?id='.$translation['message_id']->getValue());?>
     </li>
   <?php endforeach;?>
 </ul>
