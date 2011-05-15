@@ -19,17 +19,20 @@ class TranslationFormFilter extends BaseTranslationFormFilter
     $yes_no = array(''=>'',1=>'yes',0=>'no');
     $this->widgetSchema['rec_per_page'] = new sfWidgetFormChoice(array('choices' => $recPerPages), array('class'=>'rec_per_page'));
     $this->setDefault('rec_per_page', strval(sfConfig::get('app_recPerPage',10))); 
-    $this->widgetSchema->setLabels(array('rec_per_page' => 'Records per page: ',));
 
-    $this->widgetSchema['is_fuzzy'] = new sfWidgetFormChoice(array('choices' => $yes_no));
-    $this->widgetSchema['is_autotrans'] = new sfWidgetFormChoice(array('choices' => $yes_no));
+    $this->widgetSchema['is_fuzzy'] = new sfWidgetFormInputCheckbox();
+    $this->widgetSchema['is_autotrans'] = new sfWidgetFormInputCheckbox();
     $this->widgetSchema['is_translated'] = new sfWidgetFormChoice(array('choices' => $yes_no));
     $this->widgetSchema['current_page'] = new sfWidgetFormInputHidden();
     $this->widgetSchema['mess'] = new sfWidgetFormInput();
 
+    $this->widgetSchema->setLabels(array(
+      'rec_per_page' => 'Records per page: ',
+      'mess'=>'Original Message',
+    ));
 
-    $this->validatorSchema['is_fuzzy'] =  new sfValidatorChoice(array('required' => false, 'choices'=> array('', 1, 0), 'empty_value'=>''));
-    $this->validatorSchema['is_autotrans'] =  new sfValidatorChoice(array('required' => false, 'choices'=> array('', 1, 0), 'empty_value'=>''));
+    $this->validatorSchema['is_fuzzy'] =  new sfValidatorBoolean(array('required' => false, 'empty_value'=>''));
+    $this->validatorSchema['is_autotrans'] =  new sfValidatorBoolean(array('required' => false, 'empty_value'=>''));
     $this->validatorSchema['is_translated'] =  new sfValidatorChoice(array('required' => false, 'choices'=> array('', 1, 0), 'empty_value'=>''));
     $this->validatorSchema['rec_per_page'] = new sfValidatorChoice(array('required' => false, 'choices'=>array_keys($recPerPages), 'empty_value'=>'5'));
     $this->validatorSchema['mess'] = new sfValidatorString(array('required' => false));

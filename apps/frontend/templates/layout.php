@@ -11,6 +11,11 @@
     <script type="text/javascript" src="https://www.google.com/jsapi?key=ABQIAAAAYLSKVpK83ZqpxzjnjLuW3BTrReK3P99mKBTfLTiMIdvPR6kVWRT4gViM2g7g5ZnSZewMvjLnp8hUGA"></script>
   </head>
   <body>
-    <?php echo $sf_content ?>
+    <ul id="menu">
+      <li><?php echo link_to('Home','@homepage');?>
+    </ul>
+    <div id="content">
+      <?php echo $sf_content ?>
+    </div>
   </body>
 </html>
