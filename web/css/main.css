@@ -228,9 +228,14 @@ div.progress-container > div.fuzzy {
 {
   border:none;
 }
+.trans_cell
+{
+  padding-right:2px;
+}
 .translations textarea
 {
   width:100%;
+  border:1px solid gray;
 }
 .translations .original_message
 {
@@ -250,5 +255,19 @@ div.progress-container > div.fuzzy {
   padding:0 4px;
   white-space:pre;
 }
-.suggestions
+.suggestions, .o_msg
 { display:none;}
+
+.trans_action
+{
+  vertical-align:middle;
+}
+.trans_but
+{
+  /*background-color:red*/
+    vertical-align: middle;
+  width:30px; 
+  height:30px;
+  margin-left: 5px;
+  background:url(/images/search.png);
+}

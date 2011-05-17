@@ -111,11 +111,11 @@
     </tr>
     <tr>
       <th><?php echo $language['name'];?></th>
-      <td>
+      <td class="trans_cell">
         <?php echo $translation['translated_text'];?>
       </td>
-      <td>
-        <div class="butt" style="background-color:red;width:10px; height:10px;"></div>
+      <td class="trans_action">
+        <div class="trans_but"></div>
         <div class="o_msg" style="display:none"><?php echo $form->getMessage($translation['message_id']->getValue())->getOriginalText();?></div>
       </td>
     </tr>
@@ -147,7 +147,7 @@
 google.load('language', '1');
 
 $(document).ready(function () {
-   $('.butt').click(function(event)
+   $('.trans_but').click(function(event)
   {
     var mess = $(this).closest('tbody');
     google.language.translate(mess.find('.o_msg').html(), "en", "<?php echo $language['code'];?>", function(result) {
