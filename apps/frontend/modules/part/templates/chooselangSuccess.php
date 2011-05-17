@@ -1,3 +1,7 @@
+<?php if ($sf_user->hasFlash('error')): ?>
+  <div class="flash_error"><?php echo $sf_user->getFlash('error') ?></div>
+<?php endif; ?>
+
 <?php if(count($langs) != 0):?>
 
 <ul class="actions_list">

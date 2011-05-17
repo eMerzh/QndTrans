@@ -39,7 +39,13 @@ class partActions extends sfActions
       $this->form->bind($request->getParameter('message'));
       if ($this->form->isValid())
       {
-        $this->form->save();
+        try{
+          $this->form->save();
+        }
+        catch(Doctrine_Exception $ne)
+        {
+          $this->getUser()->setFlash('error', "The message you've tried to add already exists.");
+        }
         $this->redirect('part/chooselang?part='.$this->part->getId());
       }
     }

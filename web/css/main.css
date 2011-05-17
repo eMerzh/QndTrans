@@ -168,7 +168,14 @@ div.progress-container > div.fuzzy {
   background-color: #F3A004; 
   height: 12px
 }
-
+.flash_error
+{
+  background-color: #CC0000;
+  border: 2px solid #A40000;
+  color: black;
+  margin-bottom: 1.5em;
+  padding: 0.3em;
+}
 .actions_list
 {
   border:1px solid gray;
