@@ -7,7 +7,7 @@
 
 <ul class="lang_list">
   <?php foreach($langs as $lang):?>
-    <li class="lang_with_<?php echo $lang['num_trans'];?>">
+    <li class="lang_with_<?php echo $lang['num_trans']+$lang['num_fuzzy'];?>">
        <div class="progress-container">
         <div class="trans" style="width: <?php echo ($lang['num_trans']/$message_number)*100;?>%;"></div>
         <div class="fuzzy" style="width: <?php echo ($lang['num_fuzzy']/$message_number)*100;?>%;margin-left:<?php echo ($lang['num_trans']/$message_number)*100;?>%;"></div>

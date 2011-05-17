@@ -23,7 +23,8 @@ class LanguageTable extends Doctrine_Table
     ->select("l.*,
 (select count(*) from translation t where part_id = ".$part." and lang_id = l.id and (translated_text !='' AND not is_fuzzy) ) as num_trans,
 (select count(*) from translation t where part_id = ".$part." and lang_id = l.id and (translated_text !='' AND is_fuzzy) ) as num_fuzzy")
-    ->from('Language l');
+    ->from('Language l')
+    ->where("l.code != 'en' "); ///IIIK
     return $q->execute();
   }
   

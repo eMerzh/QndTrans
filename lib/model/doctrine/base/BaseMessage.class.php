@@ -37,6 +37,16 @@ abstract class BaseMessage extends sfDoctrineRecord
              'type' => 'string',
              'notnull' => true,
              ));
+
+
+        $this->index('part_msg', array(
+             'fields' => 
+             array(
+              0 => 'part_id',
+              1 => 'original_text',
+             ),
+             'type' => 'unique',
+             ));
     }
 
     public function setUp()

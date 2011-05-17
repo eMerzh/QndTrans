@@ -30,6 +30,10 @@ abstract class BaseMessageForm extends BaseFormDoctrine
       'updated_at'    => new sfValidatorDateTime(),
     ));
 
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'Message', 'column' => array('part_id', 'original_text')))
+    );
+
     $this->widgetSchema->setNameFormat('message[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

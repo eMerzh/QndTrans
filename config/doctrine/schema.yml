@@ -14,7 +14,10 @@ Message:
     original_text: { type: string, notnull: true}
   relations:
     Part: { onDelete: CASCADE, local: part_id, foreign: id, foreignAlias: Messages } 
-
+  indexes:
+    part_msg:
+      fields: [part_id, original_text]
+      type: unique
 
 # TranslatedPart:
 #   columns:
