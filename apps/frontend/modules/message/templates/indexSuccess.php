@@ -24,10 +24,10 @@
       <?php echo $search_form['mess'];?>
     </li>
 
-    <li>
-      <?php echo $search_form['rec_per_page']->renderLabel();?>
-      <?php echo $search_form['rec_per_page'];?>
-    </li>
+    <!--<li>
+      <?php //echo $search_form['rec_per_page']->renderLabel();?>
+      <?php //echo $search_form['rec_per_page'];?>
+    </li>-->
   </ul>
   <?php echo $search_form->renderHiddenFields();?>
   <input type="submit" name="Search">
@@ -101,16 +101,45 @@
   });
   </script>
 <form method="post" action="<?php echo url_for('message/acceptTranslations?lang='.$language['id'].'&part='.$part['id']);?>">
-<ul>
+<table class="translations">
   <?php foreach($form['Trans'] as $key=>$translation):?>
-    <li>
-      <h2><?php echo $form->getMessage($translation['message_id']->getValue())->getOriginalText();?></h2>
-      <div class="butt" style="background-color:red;width:10px; height:10px;float:left;"></div>
-      <?php echo $translation;?>
-      <?php echo link_to('Delete the message','part/messagedelete?id='.$translation['message_id']->getValue());?>
-    </li>
+    <tbody>
+    <tr>
+      <th><?php echo __('Original :');?></th>
+      <td class="original_message"><?php echo $form->getMessage($translation['message_id']->getValue())->getTextCharEscaped(ESC_RAW);?></td>
+      <td><!--<?php echo link_to('Delete the message','part/messagedelete?id='.$translation['message_id']->getValue());?>--></td>
+    </tr>
+    <tr>
+      <th><?php echo $language['name'];?></th>
+      <td>
+        <?php echo $translation['translated_text'];?>
+      </td>
+      <td>
+        <div class="butt" style="background-color:red;width:10px; height:10px;"></div>
+        <div class="o_msg" style="display:none"><?php echo $form->getMessage($translation['message_id']->getValue())->getOriginalText();?></div>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <?php echo $translation['is_fuzzy']->renderLabel();?><?php echo $translation['is_fuzzy'];?><br />
+        <?php echo $translation['is_autotrans']->renderLabel();?><?php echo $translation['is_autotrans'];?>
+      </td>
+      <td></td>
+    </tr>
+    <tr class="suggestions">
+      <th><?php echo __('Suggestion :');?></th>
+      <td>
+        <ul>
+          <li class="google"></li>
+        </ul>
+      </td>
+      <td></td>      
+    </tr>
+    </tbody>
+    <tbody class="spacing"><tr><td colspan="3">&nbsp;</td></tr></tbody>
   <?php endforeach;?>
-</ul>
+</table>
   <?php echo $form->renderHiddenFields();?>
   <input type="submit">
 </form>
@@ -118,17 +147,13 @@
 google.load('language', '1');
 
 $(document).ready(function () {
-  
-  $('.butt').click(function(event)
+   $('.butt').click(function(event)
   {
-    mess = $(this).parent();
-    trans_area = mess.find('textarea');
-    trans_area.attr('disabled','disabled');
-    google.language.translate(mess.find('h2').html(), "en", "<?php echo $language['code'];?>", function(result) {
+    var mess = $(this).closest('tbody');
+    google.language.translate(mess.find('.o_msg').html(), "en", "<?php echo $language['code'];?>", function(result) {
       if (!result.error) {
-        trans_area.html(result.translation);
-        console.log();
-        trans_area.removeAttr('disabled');
+        mess.find('.suggestions .google').html(result.translation);
+        mess.find('textarea').html(result.translation);
         mess.find('input[id$=\"_autotrans"]').attr('checked','checked');
       }
     });

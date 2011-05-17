@@ -14,5 +14,9 @@ class TranslationForm extends BaseTranslationForm
   {
     $this->useFields(array('id','translated_text','is_fuzzy','is_autotrans','message_id'));
     $this->widgetSchema['message_id'] = new sfWidgetFormInputHidden();
+    $this->widgetSchema->setLabels(array(
+      'is_fuzzy' => 'Someone should review this translation ',
+      'is_autotrans' => 'Automatic translation'
+    ));
   }
 }

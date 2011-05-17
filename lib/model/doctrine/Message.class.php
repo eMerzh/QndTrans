@@ -12,4 +12,22 @@
  */
 class Message extends BaseMessage
 {
+  public function getTextCharEscaped()
+  {
+    $text = sfOutputEscaper::escape('esc_entities',$this->_get('original_text'));
+    $strings = explode("\n",$text);
+    $result = array();
+    foreach($strings as $str)
+    {
+      $str = preg_replace('/\G /', '<em> </em>', $str);
+      if(preg_match ('/( )+$/', $str , $match, PREG_OFFSET_CAPTURE ))
+      {
+        $num = $match[1][1]-$match[0][1];
+        $str=substr($str, 0, $match[0][1]).str_repeat('<em> </em>',$num+1);
+      }
+      $result[] = $str;
+    }
+    return implode('<samp></samp><br />',$result);
+    return $text;
+  }
 }

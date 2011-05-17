@@ -104,10 +104,16 @@ img
   vertical-align: middle;
 }
 .clear{clear:both;}
+
 .pager_nav li
 {
   display:inline;
   margin: 0.5em;
+}
+
+.pager_nav a[href]
+{
+  color:#044065;
 }
 .pager
 {
@@ -209,3 +215,40 @@ div.progress-container > div.fuzzy {
 {
   margin-left: 1em;
 }
+
+.translations
+{
+  width: 70%;
+}
+.translations tbody
+{
+  border:1px solid gray;
+}
+.translations tbody.spacing
+{
+  border:none;
+}
+.translations textarea
+{
+  width:100%;
+}
+.translations .original_message
+{
+  border:1px solid black;
+  background-color:gray;
+  padding:0.2em;
+}
+.original_message samp
+{
+  background:url(/images/translation-newline.png) center center no-repeat;
+  padding:0 4px;
+  white-space:pre;
+}
+.original_message em
+{
+  background:url(/images/translation-space.png) center center no-repeat;
+  padding:0 4px;
+  white-space:pre;
+}
+.suggestions
+{ display:none;}
