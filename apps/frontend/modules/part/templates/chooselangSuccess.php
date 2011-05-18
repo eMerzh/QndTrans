@@ -1,6 +1,9 @@
 <?php if ($sf_user->hasFlash('error')): ?>
   <div class="flash_error"><?php echo $sf_user->getFlash('error') ?></div>
 <?php endif; ?>
+<?php if ($sf_user->hasFlash('info')): ?>
+  <div class="flash_info"><?php echo $sf_user->getFlash('info') ?></div>
+<?php endif; ?>
 
 <?php if(count($langs) != 0):?>
 

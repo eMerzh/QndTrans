@@ -20,6 +20,24 @@ class partActions extends sfActions
     $this->parts = Doctrine::getTable('Part')->getPartsWithMessages();
   }
 
+  public function executeImport(sfWebRequest $request)
+  {
+    $this->part = Doctrine::getTable('Part')->find($request->getParameter('part'));
+
+
+    $this->form = new ImportForm();    
+    if($request->isMethod('post'))
+    {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if($this->form->isValid())
+      {
+        $this->form->import($this->part);
+        $this->getUser()->setFlash('info', "File imported");
+        $this->redirect('part/chooselang?part='.$this->part->getId());
+      }
+    }
+  }
+
   public function executeChooselang(sfWebRequest $request)
   {
     $this->part_id = $request->getParameter('part');
