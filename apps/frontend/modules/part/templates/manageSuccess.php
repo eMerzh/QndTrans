@@ -18,7 +18,7 @@
     <?php foreach($msgs as $msg):?>
     <tr>
       <td><input type="checkbox" value="<?php echo $msg['id'];?>"></td>
-      <td><?php echo $msg['original_text'];?></td>
+      <td class="original_message"><?php echo $msg->getTextCharEscaped(ESC_RAW);;?></td>
       <td><?php echo link_to(image_tag('edit-delete.png'),'message/delete?id='.$msg['id']);?></td>
     </tr>
     <?php endforeach;?>
