@@ -116,4 +116,14 @@ class partActions extends sfActions
       }
     }
   }
+
+  public function executeDelete(sfWebRequest $request)
+  {
+    $this->part = Doctrine::getTable('Part')->find($request->getParameter('id'));
+    if($request->hasParameter('confirm'))
+    {
+      $this->part->delete();
+      $this->redirect('@homepage');
+    }
+  }
 }

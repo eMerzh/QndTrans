@@ -4,6 +4,7 @@
 <li><?php echo image_tag('list-add.png');?> <?php echo link_to(__('Add new message'),'part/addMessage?part='.$part->getId());?></li>
 <li><?php echo image_tag('folder-new.png');?> <?php echo link_to(__('Import Messages'),'part/import?part='.$part->getId());?></li>
 <li><?php echo image_tag('import-trans.png');?> <?php echo link_to(__('Import Translation'),'part/importtrans?part='.$part->getId());?></li>
+<li><?php echo image_tag('edit-delete.png');?> <?php echo link_to(__('Delete Part'),'part/delete?id='.$part->getId());?></li>
 </ul>
 
 <table class="manage"> 
