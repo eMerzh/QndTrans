@@ -6,6 +6,6 @@
   <?php echo __('Message :');?> <div class="quote_message">
     <?php echo $message->getOriginalText();?>
   </div>
-  <?php echo link_to('Confirm','part/messagedelete?confirm=1&id='.$message->getId());?>
+  <?php echo link_to('Confirm','message/delete?confirm=1&id='.$message->getId());?>
   <?php echo link_to('cancel','part/chooselang?part='.$message->getPartId());?>
 </p>

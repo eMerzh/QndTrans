@@ -38,6 +38,24 @@ class partActions extends sfActions
     }
   }
 
+  public function executeImporttrans(sfWebRequest $request)
+  {
+    $this->part = Doctrine::getTable('Part')->find($request->getParameter('part'));
+
+
+    $this->form = new ImportTransForm();    
+    if($request->isMethod('post'))
+    {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if($this->form->isValid())
+      {
+        $this->form->import($this->part);
+        $this->getUser()->setFlash('info', "File imported");
+        $this->redirect('part/chooselang?part='.$this->part->getId());
+      }
+    }
+  }
+
   public function executeChooselang(sfWebRequest $request)
   {
     $this->part_id = $request->getParameter('part');
@@ -68,17 +86,34 @@ class partActions extends sfActions
       }
     }
   }
-  
-  public function executeMessagedelete(sfWebRequest $request)
+  public function executeManage(sfWebRequest $request)
   {
-    $this->message = Doctrine::getTable('Message')->find($request->getParameter('id'));
-    $part = $this->message->getPartId();
-    if($request->hasParameter('confirm'))
+    $this->part = Doctrine::getTable('Part')->find($request->getParameter('part'));
+    $this->msgs = Doctrine::getTable('Message')->findAll();
+    /*$this->form =  new ManageMessagesForm(null,array('part' =>$this->part));
+    if ($request->isMethod('post'))
     {
-      
-      $this->message->delete();
-      $this->redirect('part/chooselang?part='.$part);
+      $this->form->bind($request->getParameter('manage_part'));
+    }*/
+  }
+
+  public function executeAdd(sfWebRequest $request)
+  {
+    $this->form = new PartForm();
+    if ($request->isMethod('post'))
+    {
+      $this->form->bind($request->getParameter('part'));
+      if ($this->form->isValid())
+      {
+        try{
+          $this->form->save();
+        }
+        catch(Doctrine_Exception $ne)
+        {
+          //$this->getUser()->setFlash('error', "The message you've tried to add already exists.");
+        }
+        $this->redirect('part/index');
+      }
     }
-    
   }
 }

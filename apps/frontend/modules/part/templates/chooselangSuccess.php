@@ -8,8 +8,8 @@
 <?php if(count($langs) != 0):?>
 
 <ul class="actions_list">
-<li><?php echo image_tag('list-add.png');?> <?php echo link_to(__('Add new message'),'part/addMessage?part='.$part_id);?></li>
-<li><?php echo image_tag('toggle.png');?> <a href="#" id="toggle_lang">Toggle empty languages</a></li>
+  <li><?php echo image_tag('emblem-system.png');?> <?php echo link_to(__('Manage part'),'part/manage?part='.$part_id);?></li>
+  <li><?php echo image_tag('toggle.png');?> <a href="#" id="toggle_lang"><?php echo __('Toggle empty languages');?></a></li>
 </ul>
 
 <ul class="lang_list">

@@ -15,7 +15,7 @@ class ImportForm extends BaseForm
   public function import($part)
   {
     $doc = new DOMDocument();
-    $doc->load(    $this->getValue('msg_file')->getTempName());
+    $doc->load($this->getValue('msg_file')->getTempName());
       
     $msgs = $doc->getElementsByTagName("trans-unit");
     $i=0;
@@ -46,6 +46,9 @@ class ImportForm extends BaseForm
 
     }
     $conn->commit();
+
+
+
     return $i;
   }
 }

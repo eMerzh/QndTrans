@@ -97,4 +97,24 @@ class messageActions extends sfActions
 
     }
   }
+
+  public function executeDelete(sfWebRequest $request)
+  {
+    if($request->hasParameter('id'))
+    {
+      $this->message = Doctrine::getTable('Message')->find($request->getParameter('id'));
+      $part = $this->message->getPartId();
+      if($request->hasParameter('confirm'))
+      {
+        $this->message->delete();
+        $this->redirect('part/chooselang?part='.$part);
+      }
+    }
+    elseif($request->hasParameter('ids'))
+    {
+      $ids = explode('.',$request->getParameter('ids'));
+      Doctrine::getTable('Message')->deleteIn($ids);
+      $this->redirect('part/manage?part='.$request->getParameter('part_id'));
+    }
+  }
 }

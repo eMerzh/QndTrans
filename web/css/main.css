@@ -278,3 +278,16 @@ div.progress-container > div.fuzzy {
   margin-left: 5px;
   background:url(/images/search.png);
 }
+
+.manage tr td
+{
+  padding: 0.3em;
+}
+.manage tfoot
+{
+  background-color:#EBECEC;
+}
+.manage 
+{
+  margin-bottom: 1em;
+}

@@ -32,4 +32,14 @@ class MessageTable extends Doctrine_Table
     ->where('m.part_id = ?', $part);
   return $q/*->execute()*/;
   }
+
+  public function deleteIn($ids)
+  {
+    if(empty($ids)) return false;
+    $q = Doctrine_Query::create()
+    
+    ->delete('Message m')
+    ->whereIn('m.id', $ids);
+  return $q->execute();
+  }
 }
