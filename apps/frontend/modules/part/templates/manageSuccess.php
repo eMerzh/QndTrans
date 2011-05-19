@@ -36,14 +36,14 @@
   $(document).ready(function () {  
     $('#toggle_checks').change(function (event)
     { 
-      $('.manage input').attr('checked', $(this).is(':checked'));
+      $('.manage tbody input').attr('checked', $(this).is(':checked'));
     });
 
     $('#delete_all').click(function (event)
     { 
       event.preventDefault();
       var ids = [];
-      $('.manage input:checked').each(function()
+      $('.manage tbody input:checked').each(function()
       {
         ids.push($(this).val());
       });
