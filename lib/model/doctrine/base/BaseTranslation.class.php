@@ -71,6 +71,16 @@ abstract class BaseTranslation extends sfDoctrineRecord
              'notnull' => true,
              'default' => 1,
              ));
+
+
+        $this->index('translation_msg', array(
+             'fields' => 
+             array(
+              0 => 'message_id',
+              1 => 'lang_id',
+             ),
+             'type' => 'unique',
+             ));
     }
 
     public function setUp()

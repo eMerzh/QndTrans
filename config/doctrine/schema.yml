@@ -41,3 +41,7 @@ Translation:
     Language: { onDelete: CASCADE, local: lang_id, foreign: id, foreignAlias: Translations }
     Message: { onDelete: CASCADE, local: message_id, foreign: id, foreignAlias: Translations }
     Part: { onDelete: CASCADE, local: part_id, foreign: id, foreignAlias: Messages } 
+  indexes:
+    translation_msg:
+      fields: [message_id, lang_id]
+      type: unique

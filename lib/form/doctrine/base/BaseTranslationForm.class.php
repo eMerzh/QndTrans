@@ -38,6 +38,10 @@ abstract class BaseTranslationForm extends BaseFormDoctrine
       'updated_at'      => new sfValidatorDateTime(),
     ));
 
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'Translation', 'column' => array('message_id', 'lang_id')))
+    );
+
     $this->widgetSchema->setNameFormat('translation[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
