@@ -33,8 +33,8 @@ class TranslationTable extends Doctrine_Table
     $lang_id = $language->getId();
     $query = "insert into translation ( part_id, lang_id, message_id, created_at, updated_at, is_autotrans)
       ( SELECT $part_id, $lang_id, m.id, now(), now(), false
-        from message m where not exists 
-          (select 1 from translation t where t.lang_id = $lang_id and t.part_id = $part_id  and t.message_id = m.id)
+        from message m where m.part_id = $part_id and not exists 
+          (select 1 from translation t where t.message_id = m.id AND t.lang_id = $lang_id )
       )";
     $conn->exec($query);
   }
