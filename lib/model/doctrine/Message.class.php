@@ -28,6 +28,5 @@ class Message extends BaseMessage
       $result[] = $str;
     }
     return implode('<samp></samp><br />',$result);
-    return $text;
   }
 }

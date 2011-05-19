@@ -10,7 +10,7 @@ class ImportTransForm extends BaseForm
           'mime_types' => array('text/xml','application/xml')
       )); 
 
-    $this->widgetSchema['lang'] = new sfWidgetFormDoctrineChoice(array('model' => 'Language', 'add_empty' => false));
+    $this->widgetSchema['lang'] = new sfWidgetFormDoctrineChoice(array('model' => 'Language', 'add_empty' => true));
     $this->validatorSchema['lang'] = new sfValidatorDoctrineChoice(array('model' => 'Language'));
 
     $this->widgetSchema['fuzzy'] = new sfWidgetFormInputCheckbox();
@@ -41,7 +41,7 @@ class ImportTransForm extends BaseForm
       if($source == ''|| $target =='') continue;
       try
       {
-        $num = $conn->exec('update translation set translated_text = '. $conn->quote($target, 'string').', is_fuzzy = '.$fuzzy.'
+        $num = $conn->exec('update translation set translated_text = '. $conn->quote($target, 'string').', is_fuzzy = '.$fuzzy.', updated_at = now()
           where part_id='.$part->getId().' AND  lang_id ='.$lang.' AND 
           message_id  = ( select id from message where original_text = '.$conn->quote($source, 'string').' and part_id='.$part->getId().')');
 

@@ -27,8 +27,8 @@ class ImportForm extends BaseForm
     {
       $conn->exec("SAVEPOINT SAVE_".$i);
 
-      $source = trim($msg->getElementsByTagName( "source" )->item(0)->nodeValue);
-      if($source == '') continue;
+      $source = $msg->getElementsByTagName( "source" )->item(0)->nodeValue;
+      if(trim($source) == '') continue;
       $m = new Message();
       $m->setPartId($part->getId());
       $m->setOriginalText($source);

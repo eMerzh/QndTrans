@@ -89,7 +89,7 @@ class partActions extends sfActions
   public function executeManage(sfWebRequest $request)
   {
     $this->part = Doctrine::getTable('Part')->find($request->getParameter('part'));
-    $this->msgs = Doctrine::getTable('Message')->findAll();
+    $this->msgs = Doctrine::getTable('Message')->getForPart($request->getParameter('part'));
     /*$this->form =  new ManageMessagesForm(null,array('part' =>$this->part));
     if ($request->isMethod('post'))
     {

@@ -175,7 +175,19 @@ div.progress-container > div.fuzzy {
   color: black;
   margin-bottom: 1.5em;
   padding: 0.3em;
+  max-width: 80%;
 }
+
+.flash_info
+{
+  background-color: #8BE233;
+  border: 2px solid #74D215;
+  max-width: 80%;
+  color: black;
+  margin-bottom: 1.5em;
+  padding: 0.3em;
+}
+
 .actions_list
 {
   border:1px solid gray;
@@ -283,9 +295,13 @@ div.progress-container > div.fuzzy {
 {
   padding: 0.3em;
 }
-.manage tfoot
+
+.manage thead tr, .manage tfoot tr
 {
   background-color:#EBECEC;
+  border: 1px solid gray;
+  margin-bottom: 1.5em;
+  padding: 0.7em;
 }
 .manage 
 {

@@ -1,4 +1,4 @@
-<h1><?php echo __('Import Messages file');?></h1>
+<h1><?php echo __('Import Translation file');?></h1>
 <form action="<?php echo url_for('part/importtrans?part='.$part->getId());?>" method="post" enctype="multipart/form-data">
     <table>
     <tr>

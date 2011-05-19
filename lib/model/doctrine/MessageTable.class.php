@@ -29,9 +29,18 @@ class MessageTable extends Doctrine_Table
   {
     $q = Doctrine_Query::create()
     ->from('Message m')
-    ->where('m.part_id = ?', $part);
+    ->where('m.part_id = ?', $part)
+    ->andWhere('m.lang_id = ?',$lang);
   return $q/*->execute()*/;
   }
+  public function getForPart($part)
+  {
+    $q = Doctrine_Query::create()
+    ->from('Message m')
+    ->where('m.part_id = ?', $part);
+  return $q->execute();
+  }
+
 
   public function deleteIn($ids)
   {
