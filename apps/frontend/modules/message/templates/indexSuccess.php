@@ -59,6 +59,7 @@
 
 <h1>Translation of <?php echo $part['name'];?> to <?php echo $language['name'];?></h1>
 
+<?php echo link_to('Export to Xliff','message/xliff?part='.$part['id'].'&lang='.$language['id']);?>
   
   <div class="navigation">
 

@@ -29,9 +29,10 @@ class MessageTable extends Doctrine_Table
   {
     $q = Doctrine_Query::create()
     ->from('Message m')
+    ->innerJoin('m.Translations t')
     ->where('m.part_id = ?', $part)
-    ->andWhere('m.lang_id = ?',$lang);
-  return $q/*->execute()*/;
+    ->andWhere('t.lang_id = ?',$lang);
+  return $q->execute();
   }
   public function getForPart($part)
   {

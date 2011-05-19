@@ -12,15 +12,14 @@ class messageActions extends sfActions
 {
   public function executeXliff(sfWebRequest $request)
   {
-    $query = Doctrine::getTable('Message')->getMessagesForTranslation(
+   $this->messages = Doctrine::getTable('Message')->getMessagesForTranslation(
       $request->getParameter('part'),
       $request->getParameter('lang')
     );
-    $this->messages = $query->execute();
+
     $this->language = Doctrine::getTable('Language')->find($request->getParameter('lang'));
     $this->part = Doctrine::getTable('Part')->find($request->getParameter('part'));
 
-    $this->translations = Doctrine::getTable('Translation')->getTranslationsForMessages($this->messages, $request->getParameter('lang'));
     $request->setRequestFormat('xml');
   }
   
