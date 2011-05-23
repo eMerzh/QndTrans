@@ -19,7 +19,13 @@ class TranslationTable extends Doctrine_Table
 
   public function searchByIds($ids)
   {
-    if(empty($ids)) return array();
+    $nids = array();
+    foreach($ids as $id)
+    {
+      if(strval(intval($id)) === $id)
+        $nids [] = intval($id);
+    }
+    if(empty($nids)) return array();
     $q = Doctrine_Query::create()
       ->from('Translation t')
       ->wherein('id',$ids);

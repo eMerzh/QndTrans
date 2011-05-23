@@ -39,7 +39,6 @@ class messageActions extends sfActions
   {
     $web_req = $request->getParameter('translations');
     $ids = explode('.',$web_req['msg_ids']);
-
     $this->form = new TransPageForm(null,array(
       'translations' =>  Doctrine::getTable('Translation')->searchByIds($ids),
       'part_id' => $request->getParameter('part'),
@@ -50,7 +49,8 @@ class messageActions extends sfActions
       {
         try
         {
-          $this->form->save();
+          if($this->form->getValue('msg_ids'))
+            $this->form->save();
           $url = $this->getController()->genUrl('message/index?part='.$request->getParameter('part').'&lang='.$request->getParameter('lang').'&page='.$this->currentPage)
             .'?'.http_build_query( unserialize( $this->form->getValue('req')) );
           $this->redirect($url);
