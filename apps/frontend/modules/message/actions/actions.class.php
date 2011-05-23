@@ -10,6 +10,18 @@
  */
 class messageActions extends sfActions
 {
+  public function executeFeed(sfWebRequest $request)
+  {
+    $this->language = Doctrine::getTable('Language')->find($request->getParameter('lang'));
+    $this->part = Doctrine::getTable('Part')->find($request->getParameter('part'));
+
+    ///Insert Missing Translations
+    Doctrine::getTable('Translation')->completeTranslationsFor($this->part, $this->language);
+
+    $this->messages = Doctrine::getTable('Message')->getMessagesUntranslated($this->part->getId(),$this->language->getId());
+    $request->setRequestFormat('xml');
+
+  }
   public function executeXliff(sfWebRequest $request)
   {
    $this->messages = Doctrine::getTable('Message')->getMessagesForTranslation(

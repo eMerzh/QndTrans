@@ -25,6 +25,18 @@ class MessageTable extends Doctrine_Table
     return $q->count();
   }
 
+  public function getMessagesUntranslated($part, $lang)
+  {
+    $q = Doctrine_Query::create()
+    ->from('Message m')
+    ->innerJoin('m.Translations t')
+    ->where('m.part_id = ?', $part)
+    ->andWhere('t.lang_id = ?',$lang)
+    ->andWhere("t.translated_text = ''")
+    ->orderBy('created_at asc');
+  return $q->execute();
+  }
+
   public function getMessagesForTranslation($part, $lang)
   {
     $q = Doctrine_Query::create()
