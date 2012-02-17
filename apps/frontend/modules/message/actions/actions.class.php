@@ -34,6 +34,16 @@ class messageActions extends sfActions
 
     $request->setRequestFormat('xml');
   }
+
+  public function executeOrigxliff(sfWebRequest $request)
+  {
+    $this->messages = Doctrine::getTable('Message')->getForPart($request->getParameter('part'));
+
+    $this->language = Doctrine::getTable('Language')->find($request->getParameter('lang'));
+    $this->part = Doctrine::getTable('Part')->find($request->getParameter('part'));
+
+    $request->setRequestFormat('xml');
+  }
   
   public function executeAcceptTranslations(sfWebRequest $request)
   {
